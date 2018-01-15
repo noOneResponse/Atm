@@ -4,22 +4,19 @@ import java.util.Scanner;
 
 public class Query{
 	
-	private User user ;
-	public Query(User user){
-		this.user =user;
-	}
+
 	
-	public void getQuery(){
+	public void getQuery(int i,User[] user){
 		
 		
 		while(true){		
-			System.out.println(user.getName());
-			System.out.println(user.getAmount());
+			System.out.println(user[i].getName());
+			System.out.println(user[i].getAmount());
 			System.out.println("1.返回上一级");
 			Scanner input = new Scanner(System.in);
 			String num = input.next();
 			if(num.equals("1")){
-				backMenu();
+				backMenu(i,user);
 			}
 			else{
 				System.out.println("输入错误，请重新输入");
@@ -28,8 +25,8 @@ public class Query{
 		}
 	}
 	
-	public void backMenu(){
-		Menu menu = new Menu(user);
-		menu.getMethod();
+	public void backMenu(int i,User[] user){
+		Menu menu = new Menu();
+		menu.getMethod(i,user);
 	}
 }

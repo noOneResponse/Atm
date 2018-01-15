@@ -3,12 +3,8 @@ import java.util.Scanner;
 
 public class Cash{
 	
-	private User user ;
-	public Cash(User user){
-		this.user =user;
-	}
 	
-	public void getCash(){
+	public void getCash(int i,User[] user){
 	double number;
 
 		while(true){
@@ -16,7 +12,7 @@ public class Cash{
 			Scanner input = new Scanner(System.in);
 			double num = input.nextDouble();
 			//Account account = new Account();
-			double num1=user.getAmount();
+			double num1=user[i].getAmount();
 			if(num%100==0&&num>0){
 				if(num1>num){
 					number=num;
@@ -41,18 +37,18 @@ public class Cash{
 			String num2=input.next();
 			if(num2.equals("1")){
 				
-				double amount=user.getAmount();
-				user.setAmount(amount-number);
-				System.out.println("取款成功，现在的余额为"+user.getAmount());
-				Success success = new Success(user);
-				success.getSuccess();
+				double amount=user[i].getAmount();
+				user[i].setAmount(amount-number);
+				System.out.println("取款成功，现在的余额为"+user[i].getAmount());
+				Success success = new Success();
+				success.getSuccess(i,user);
 			}
 			if(num2.equals("2")){
-				getCash();
+				getCash(i,user);
 			}
 			if(num2.equals("3")){
-				Menu menu = new Menu(user);
-				menu.getMethod();
+				Menu menu = new Menu();
+				menu.getMethod(i,user);
 			}
 			else{
 				System.out.println("输入错误，请重新输入");

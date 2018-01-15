@@ -4,24 +4,28 @@ public class User{
 	private String user;
 	private String password;
 	private String name;
-	private double amount=1000;
+	private double amount;
+	public User(String user,String password,String name){
+		this.user = user;
+		this.password = password;
+		this.name = name;
+		this.amount = 1000;
+	}
+	public User(String user,String password){
+	 	this.user=user;
+		this.password=password;
+	}
+	public User(){
+		
+	}
 	public String getUser(){
 		return this.user;
-	}
-	public void setUser(String user){
-		this.user=user;
 	}
 	public String getPassword(){
 		return this.password;
 	}
-	public void setPassword(String password){
-		this.password=password;
-	}
 	public String getName(){
 		return this.name;
-	}
-	public void setName(String name){
-		this.name=name;
 	}
 	public double getAmount(){
 		return this.amount;
@@ -29,5 +33,10 @@ public class User{
 	public void setAmount(double money){
 		this.amount=money;
 	}
+	public boolean isequals(User anotheruser){
+		return anotheruser.getUser().equals(user);
+	}
 	
+	
+		
 }

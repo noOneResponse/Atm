@@ -3,12 +3,9 @@ import java.util.Scanner;
 
 public class Deposit{
 	
-	private User user ;
-	public Deposit(User user){
-		this.user =user;
-	}
+
 	
-	public void getDeposit(){
+	public void getDeposit(int i,User[] user){
 	double number;
 
 		while(true){
@@ -32,18 +29,18 @@ public class Deposit{
 			Scanner input = new Scanner(System.in);
 			String num2=input.next();
 			if(num2.equals("1")){
-				double amount=user.getAmount();
-				user.setAmount(amount+number);
-				System.out.println("存款成功，现在的余额为"+user.getAmount());
-				Success success = new Success(user);
-				success.getSuccess();
+				double amount=user[i].getAmount();
+				user[i].setAmount(amount+number);
+				System.out.println("存款成功，现在的余额为"+user[i].getAmount());
+				Success success = new Success();
+				success.getSuccess(i,user);
 			}
 			if(num2.equals("2")){
-				getDeposit();
+				getDeposit(i,user);
 			}
 			if(num2.equals("3")){
-				Menu menu = new Menu(user);
-				menu.getMethod();
+				Menu menu = new Menu();
+				menu.getMethod(i,user);
 			}
 			else{
 				System.out.println("输入错误，请重新输入");

@@ -2,63 +2,73 @@ package com.feicui.atm;
 import java.util.Scanner;
 
 public class Login{
-		
-	private User user ;
-	public Login(User user){
-		this.user =user;
-	}
+	private int i = 0;	
 	
-	public void loginIn() {		
-		
+	public void loginIn(User[] user) {		
+		 
 		Scanner input = new Scanner(System.in);
-		
 		
 		while(true){
 						
 			System.out.println("请输入账户");
 			String account = input.next();
-								
-			if(account.length()==12){
-				
-				if(account.equals("370120180104")||account.equals("370120180108")){
+			String acount = String.valueOf(account.length());	
+			
+			if(checkAccount(acount)){
+				if(existUser(user,account)){
 					
 					while(true){
 						System.out.println("请输入密码");
 						String password = input.next();
-						if(account.equals("370120180104")&&password.equals("123456")){
-							System.out.println("登陆成功");
-							user.setName("翡翠侠");
-							user.setUser("370120180104");
-							user.setPassword("123456");
-							user.setAmount(1000);
+						if(existPassword(user,password)){
+						
 							break;
 						}
-						else if(account.equals("370120180108")&&password.equals("123456")){
-							System.out.println("请输入密码");
-							user.setName("爱国者");
-							user.setUser("370120180108");
-							user.setPassword("123456");
-							user.setAmount(1000);
-							break;
-						}
-						else {
+						else{
 							System.out.println("密码输入错误，请重新输入");
 							continue;
-						}					
-					}					
+						}
+					}
 				}
-				else{
-					System.out.println("账号不存在，请重新输入");
-					continue;	
-				}											
+				else {
+					System.out.println("账号不存在，请重新输入");	
+				}
+				
 			}
 			else{
 				System.out.println("账号格式不正确，请重新输入");	
 				continue;
-			
 			}
-			Menu menu = new Menu(user);
-			menu.getMethod();	
+			
+		Menu menu = new Menu();
+		menu.getMethod(this.i,user);
 		}	
+			
+	}
+	public boolean checkAccount(String account) {
+		
+		return account.matches("[0-9]{1,3}");
+			
+	}
+	public boolean existUser(User[] user,String account){
+		int i;
+		for(i=0;i<user.length;i++){
+			
+			if(user[i].getUser().equals(account)){
+				this.i=i;
+				return true;
+			}							
+		}
+				return false;
+	}
+	public boolean existPassword(User[] user,String password){
+		if(user[this.i].getPassword().equals(password)){
+			return true;
+		}
+			return false;
+								
+		
 	}
 }
+
+
